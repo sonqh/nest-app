@@ -17,7 +17,7 @@ import {
         schema: ReservationSchema,
       },
     ]),
-   LoggerModule,
+    LoggerModule,
   ],
   controllers: [ReservationsController],
   providers: [ReservationsService, ReservationsRepository],
