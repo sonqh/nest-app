@@ -1,10 +1,12 @@
-FROM node:alpine As development
+FROM node:20-alpine As development
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
 
 COPY package.json ./
 COPY pnpm-lock.yaml ./
+COPY nest-cli.json nest-cli.json
+
 
 RUN npm install -g pnpm
 
@@ -17,7 +19,7 @@ COPY . .
 RUN pnpm run build
 
 # Production image
-FROM node:alpine as production
+FROM node:20-alpine as production
 
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
