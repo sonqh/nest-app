@@ -4,7 +4,7 @@ import { Logger, NotFoundException } from '@nestjs/common';
 
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;
-  constructor(protected readonly model: Model<TDocument>) {}
+  constructor(protected readonly model: Model<TDocument>) { }
 
   async create(data: Omit<TDocument, '_id'>): Promise<TDocument> {
     this.logger.debug(`Creating a new document`);
@@ -44,6 +44,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
   async find(filterQuery: FilterQuery<TDocument>): Promise<TDocument[]> {
     this.logger.debug(`Finding documents`);
+    console.log("filterQuery == ", filterQuery)
     const document = this.model.find(filterQuery).lean<TDocument[]>();
 
     if (!document) {
